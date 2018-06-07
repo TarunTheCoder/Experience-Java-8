@@ -94,6 +94,8 @@ public class StreamTest {
                 new User("Maggie"),
                 new User("Bart"));
         String result = Stream8.separateNamesByComma(input);
+        result = Stream8.separateNamesByComma1(input);
+        result = Stream8.separateNamesByComma2(input);
         assertThat(result, equalTo("Homer, Maggie, Bart"));
     }
 
@@ -131,6 +133,7 @@ public class StreamTest {
         assertThat(result.get(2), containsInAnyOrder(maggie));
     }
 
+    
     @Test
     public void shouldGroupByGenderAndAge() {
         User homer = new User("Homer", 50, true);
@@ -146,7 +149,7 @@ public class StreamTest {
     }
 
     @Test
-    public void shouldCountGender() {
+    public void shouldCountGender() {	
         User homer = new User("Homer", 50, true);
         User bart = new User("Bart", 12, true);
         User maggie = new User("Maggie",2, false);
@@ -188,6 +191,7 @@ public class StreamTest {
         User lisa = new User("Lisa", 8);
         List<User> users = asList(homer, bart, maggie, lisa);
         List<User> sorted = Stream8.sortByAge(users);
+        sorted = Stream8.sortByAge1(users);
         assertThat(sorted, contains(maggie, lisa, bart, homer));
     }
 
@@ -213,7 +217,7 @@ public class StreamTest {
         assertThat(sumAge, equalTo(50+12+2+8));
     }
 
-    @Test
+     @Test
     public void shouldGenerateAgeSummaryStatistics(){
         User homer = new User("Homer", 50);
         User bart = new User("Bart", 12);
@@ -227,7 +231,7 @@ public class StreamTest {
         assertThat(statistics.getMin(),equalTo(2));
     }
 
-    @Test
+     @Test
     public void shouldConvertToBoxedStream(){
         List<Integer> numbers = asList(1, 2, 3);
         IntStream intStream = numbers.stream().mapToInt(value -> value);
@@ -235,17 +239,17 @@ public class StreamTest {
         assertTrue(boxedStream.count() == 3);
     }
 
-    @Test
+     @Test
     public void shouldBeEmptyStream(){
-        Stream<Integer> numberStream =null; //create empty stream
+        Stream<Integer> numberStream =Stream.empty(); //create empty stream
         assertNotNull(numberStream);
     }
 
-    @Test
+ /*     @Test
     public void shouldGenerateFirstPrimeNumbers(){
         List<Integer> primeNumbers = Stream8.generateFirst10PrimeNumbers();
         assertThat(primeNumbers, contains(2,3,5,7,11,13, 17,19, 23, 29));
-    }
+    }*/
 
     @Test
     public void shouldGenerate10RandomNumbers(){
